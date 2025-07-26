@@ -13,13 +13,13 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img src="/img/logo.png" alt="" >
+                <img src="img/logo.png" alt="" >
 
             </div>
             <div class="manu">
                 <nav class="nav">
                     <ul class="menu">
-                    <li><a href="index.php"><i class="fas fa-home"></i> Trang Chủ</a></li>
+                    <li><a href="trangchu.html"><i class="fas fa-home"></i> Trang Chủ</a></li>
                     <li><a href="sach.php"><i class="fas fa-book"></i> Tất Cả Sách</a></li>
 
                     <li class="has-submenu">

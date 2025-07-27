@@ -74,12 +74,45 @@
                     <div class="book"><img class="img-book" src="https://images.careerviet.vn/content/images/sach-hay-careerbuilder-12.jpg" alt=""><div class="book-title">Người bán hàng vĩ đại nhất thế giới</div><div class="book-tacgia">Tác giả: Og Mandino</div><div class="book-price">Giá: $32</div></div>
                     <div class="book"><img class="img-book" src="https://images.careerviet.vn/content/images/sach-hay-careerbuilder-12.jpg" alt=""><div class="book-title">Sách thêm</div><div class="book-tacgia">Tác giả: A</div><div class="book-price">Giá: $30</div></div>
                 </div>
-
-                
+                 <div class="phan-trang" id="phanTrang"></div>
                 <div class="footer">Footer</div>
             </div>
         </div>
     </div>
+<!-- Phân trang -->
+    <script>
+        const books = document.querySelectorAll('.book');
+        const phanTrang = document.getElementById('phanTrang');
+        const sachMoiTrang = 10;  // 10 quyển mỗi trang
+        let trangHienTai = 1;
+
+        function hienThiTrang(trang) {
+            const batDau = (trang - 1) * sachMoiTrang;
+            const ketThuc = batDau + sachMoiTrang;
+            books.forEach((book, index) => {
+                book.style.display = (index >= batDau && index < ketThuc) ? 'block' : 'none';
+            });
+        }
+
+        function taoNutPhanTrang() {
+            phanTrang.innerHTML = '';
+            const tongTrang = Math.ceil(books.length / sachMoiTrang);
+            for (let i = 1; i <= tongTrang; i++) {
+                const nut = document.createElement('button');
+                nut.innerText = i;
+                nut.className = (i === trangHienTai) ? 'active' : '';
+                nut.addEventListener('click', () => {
+                    trangHienTai = i;
+                    hienThiTrang(trangHienTai);
+                    taoNutPhanTrang();
+                });
+                phanTrang.appendChild(nut);
+            }
+        }
+
+        hienThiTrang(trangHienTai);
+        taoNutPhanTrang();
+    </script>
         <!-- <div class="main">
             <div class="main-left">
                 2

@@ -1,29 +1,45 @@
-<div style="background:#333;padding:10px; display:flex; align-items:center; gap:20px; color:white;">
-    <!-- Logo hoặc tên website -->
-    <a href="/WEB_nhom12/Nhom_WEB/index.php" style="color:white;font-weight:bold;">Trang chủ</a>
-    <a href="/WEB_nhom12/Nhom_WEB/quanlykho.php" style="color:white;">Quản lý kho sách</a>
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+<link rel="stylesheet" href="/WEB_nhom12/Nhom_WEB/style.css">
 
-    <!-- Form tìm kiếm chung -->
-    <form method="get" action="/WEB_nhom12/Nhom_WEB/index.php" style="margin:0; display:flex; gap:5px;">
-        <input type="text" name="keyword" placeholder="Tìm sách..." style="padding:5px;">
-        <select name="id_the_loai" style="padding:5px;">
-            <option value="">-- Tất cả --</option>
-            <?php 
-            include_once("connect.php");
-            $resultTL = $conn->query("SELECT * FROM TheLoai");
-            while($tl = $resultTL->fetch_assoc()){
-                echo "<option value='{$tl['id']}'>{$tl['ten_the_loai']}</option>";
+<div class="header">
+    <!-- Logo + link -->
+    <div class="nav-left">
+        <a href="/WEB_nhom12/Nhom_WEB/index.php" class="logo">Trang chủ</a>
+        <a href="/WEB_nhom12/Nhom_WEB/quanlykho.php">Quản lý kho sách</a>
+    </div>
+
+    <!-- Form tìm kiếm -->
+    <form action="/WEB_nhom12/Nhom_WEB/timkiem.php" method="get" class="search-form">
+        <input type="text" name="keyword" placeholder="Tìm sách...">
+        <select name="theloai">
+            <option value="">Tất cả thể loại</option>
+            <?php
+            $sqlTL = "SELECT * FROM TheLoai";
+            $resultTL = $conn->query($sqlTL);
+            while($row = $resultTL->fetch_assoc()){
+                echo "<option value='{$row['id']}'>{$row['ten_the_loai']}</option>";
             }
             ?>
         </select>
         <button type="submit">Tìm</button>
     </form>
 
-    <!-- Các nút khác -->
-    <div style="margin-left:auto;">
-        <a href="/WEB_nhom12/Nhom_WEB/user/dangky.php" style="color:white;">Đăng ký</a> |
-        <a href="/WEB_nhom12/Nhom_WEB/user/dangnhap.php" style="color:white;">Đăng nhập</a> |
-        <a href="/WEB_nhom12/Nhom_WEB/giohang.php" style="color:white;">Giỏ hàng</a>
-    </div>
+    <!-- Tài khoản -->
+    <div class="nav-right">
+    <?php if(isset($_SESSION['user'])): ?>
+        <span>Xin chào, <?= $_SESSION['user']['username'] ?></span>
+        <a href="/WEB_nhom12/Nhom_WEB/dangky_dangnhap/dangxuat.php">Đăng xuất</a>
+    <?php else: ?>
+        <a href="/WEB_nhom12/Nhom_WEB/dangky_dangnhap/dangky.php">Đăng ký</a>
+        <a href="/WEB_nhom12/Nhom_WEB/dangky_dangnhap/dangnhap.php">Đăng nhập</a>
+    <?php endif; ?>
+    <a href="/WEB_nhom12/Nhom_WEB/phangiohang/giohang.php">Giỏ hàng</a>
+</div>
+
+
 </div>
 <hr>

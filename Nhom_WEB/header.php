@@ -10,7 +10,25 @@ if (session_status() == PHP_SESSION_NONE) {
     <div class="nav-left">
         <a href="/WEB_nhom12/Nhom_WEB/index.php" class="logo">Trang chủ</a>
         <a href="/WEB_nhom12/Nhom_WEB/quanlykho.php">Quản lý kho sách</a>
+        <button onclick="doichedo()">Đổi chế độ</button>
+
     </div>
+    <script>
+        var chedo = false; // false = sáng, true = tối
+
+function doichedo() {
+    if (chedo) {
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+        chedo = false;
+    } else {
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+        chedo = true;
+    }
+}
+
+    </script>
 
     <!-- Form tìm kiếm -->
     <form action="/WEB_nhom12/Nhom_WEB/timkiem.php" method="get" class="search-form">
